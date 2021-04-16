@@ -1,6 +1,6 @@
 # animation
 
-Basic Animation. Animated Widget. Hooks.
+Basic Animation. Animated Widget. Hooks. Sequence Animation.
 
 ## Getting Started
 
