@@ -10,19 +10,12 @@ class AnimatedWidgetView extends StatefulWidget {
 class _AnimatedWidgetViewState extends State<AnimatedWidgetView>
     with TickerProviderStateMixin {
   AnimationController controller;
-  Animation growAnimation;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 3),
-    )..addListener(() {
-        setState(() {});
-        // print('GrowAnimation value: ${growAnimation.value}');
-      });
-    growAnimation = Tween<double>(begin: 0, end: 200).animate(controller);
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
     controller.forward();
   }
 
@@ -30,12 +23,25 @@ class _AnimatedWidgetViewState extends State<AnimatedWidgetView>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          height: growAnimation.value,
-          width: growAnimation.value,
-          color: Colors.red,
-        ),
+        child: GrowingContainer(controller: controller),
       ),
+    );
+  }
+}
+
+class GrowingContainer extends AnimatedWidget {
+  GrowingContainer({AnimationController controller})
+      : super(
+            listenable: Tween<double>(begin: 0, end: 200).animate(controller));
+
+  @override
+  Widget build(BuildContext context) {
+    Animation<double> animation = listenable;
+
+    return Container(
+      height: animation.value,
+      width: animation.value,
+      color: Colors.red,
     );
   }
 }
