@@ -1,6 +1,6 @@
 # animation
 
-A new Flutter project.
+Basic Animation. Animated Widget. Hooks.
 
 ## Getting Started
 
